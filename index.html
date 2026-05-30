@@ -359,7 +359,7 @@
                     </div>
                     <div>
                         <div class="slider-label-row"><span>Boldness</span><span class="slider-val" id="org_weight_val">700</span></div>
-                        <input type="range" id="org_weight" min="100" max="900" step="100" oninput="saveAndRefresh()">
+                       <input type="range" id="org_weight" min="100" max="1600" step="1" oninput="saveAndRefresh()">
                     </div>
                     <div style="grid-column: 1/-1;">
                         <div class="slider-label-row"><span>Height (Vertical)</span><span class="slider-val" id="org_v_stretch_val">1.0</span></div>
@@ -412,7 +412,7 @@
 
                     <div class="slider-container">
                         <div class="slider-label-row"><span>Boldness</span><span class="slider-val" id="fw_val">650</span></div>
-                        <input type="range" id="font_weight" min="100" max="1600" step="50" value="650" oninput="saveAndRefresh()">
+                        <input type="range" id="font_weight" min="100" max="1600" step="1" value="650" oninput="saveAndRefresh()">
                     </div>
                     <div class="slider-container">
                         <div class="slider-label-row"><span>Stretch (Spacing)</span><span class="slider-val" id="fs_stretch_val">0</span></div>
@@ -452,7 +452,7 @@
                     </div>
                     <div class="slider-container">
                         <div class="slider-label-row"><span>Date Boldness</span><span class="slider-val" id="date_fw_val">450</span></div>
-                        <input type="range" id="date_font_weight" min="100" max="1600" step="50" value="450" oninput="saveAndRefresh()">
+                        <input type="range" id="date_font_weight" min="100" max="1600" step="1" value="450" oninput="saveAndRefresh()">
                     </div>
                     <div class="slider-container">
                         <div class="slider-label-row"><span>Date Stretch (Spacing)</span><span class="slider-val" id="date_fs_stretch_val">-2</span></div>
@@ -702,18 +702,18 @@
                 name: "TEMPLATE 8",
                 file: "noor8.jpg",
                 // Settings extracted from screenshots (7969-7976)
-                start_y: 424, line_gap: 58,
-                pos_name: 240, pos_booyah: 677, pos_kill: 1030, pos_place: 835, pos_total: 1198,
+                start_y: 400, line_gap: 48,
+                pos_name: 240, pos_booyah: 589, pos_kill: 815, pos_place: 702, pos_total: 920,
                 
                 // Table Font (Community 1 = Rajdhani)
                 font_size: 32, font_weight: 420, name_font_size: 32, font_stretch: 0, font_v_stretch: 1, font_family: "Rajdhani",
                 
                 // Date Settings (Community 2 = Teko)
-                date_x: 1855, date_y: 1290,
+                date_x: 960, date_y: 1050,
                 date_fs: 38, date_fw: 450, date_stretch: 0.5, date_v_stretch: 1, date_font: "Teko",
                 
                 // Organizer Settings (Community 3 = Black Ops One)
-                org_x: 500, org_y: 100, org_size: 59, org_weight: 400, org_v_stretch: 1,
+                org_x: 725, org_y: 270, org_size: 38, org_weight: 400, org_v_stretch: 1,
                 org_font: "Black Ops One",
                 
                 // Logo Settings
@@ -779,8 +779,36 @@
                     place: {r:0, g:229, b:255}, total: {r:255, g:255, b:255}, date: {r:0, g:229, b:255},
                     organizer: {r:255, g:255, b:255}
                 }
+            },
+            {
+                name: "TEMPLATE 11",
+                file: "noor11.jpg", // YAHAN APNI NAYI IMAGE KA NAAM DALEIN
+                
+                // Table Alignment (Inko UI se test karke set karein)
+                start_y: 392, line_gap: 64.1,
+                pos_name: 510, pos_booyah: 903, pos_kill: 982, pos_place: 1060, pos_total: 1136,
+                
+                // Main Font
+                font_size: 27, font_weight: 429, name_font_size: 27, font_stretch: 0, font_v_stretch: 1, font_family: "Montserrat",
+                
+                // Date Settings
+                date_x: 1090, date_y: 1175,
+                date_fs: 30, date_fw: 500, date_stretch: 0, date_v_stretch: 1, date_font: "Rajdhani",
+                
+                // Organizer & Logo Settings
+                org_x: 939, org_y: 259, org_size: 36, org_weight: 700, org_v_stretch: 1,
+                org_font: "Black Ops One",
+                
+                logo_x: 20, logo_y: 20, logo_size: 100,
+                hue: 0, saturation: 100,
+                
+                // Colors (Default White rakhe hain)
+                colors: {name: {r:0, g:0, b:0}, booyah: {r:0, g:0, b:0}, kill: {r:0, g:0, b:0},
+                    place: {r:0, g:0, b:0}, total: {r:0, g:0, b:0}, date: {r:255, g:255, b:255},
+                    organizer: {r:255, g:255, b:255}
+                }
             }
-          ];
+                ];
         
 
         // --- GLOBAL STATE ---
@@ -1473,7 +1501,8 @@ const fontArray = ["Montserrat","SF Pro Display", "Urbanist", "Rajdhani", "Teko"
                 const dY = parseFloat(document.getElementById('date_y').value);
                 
                 let dStroke = 0;
-                if (dWeight > 400) dStroke = (dSize / 25) * (dWeight / 400);
+if (dWeight > 400) dStroke = ((dWeight - 400) / 400) * (dSize / 8);
+
                 
                 ctx.save();
                 ctx.translate(dX, dY);
@@ -1539,7 +1568,7 @@ const fontArray = ["Montserrat","SF Pro Display", "Urbanist", "Rajdhani", "Teko"
                     let currentSize = isName ? (nameSliderValue || fontSize) : fontSize;
                     
                     let currentStrokeWidth = 0;
-                    if (rawWeight > 400) currentStrokeWidth = (currentSize / 25) * (rawWeight / 400);
+if (rawWeight > 400) currentStrokeWidth = ((rawWeight - 400) / 400) * (currentSize / 8);
 
                     ctx.font = `${cssWeight} ${currentSize}px "${fontFamily}", sans-serif`;
                     
@@ -1582,7 +1611,28 @@ const fontArray = ["Montserrat","SF Pro Display", "Urbanist", "Rajdhani", "Teko"
             } else if (currentTempIndex === 3) { // Template 4 (Default)
                 wmColor = "rgba(255, 255, 255, 0.9)";
                 wmX = 25;
+            } else if (currentTempIndex === 10) { // <--- TEMPLATE 11 YAHAN HAI
+                wmColor = "rgba(0, 0, 0, 0.9)"; // Sirf Template 11 ke liye Black
+                wmX = 25;
             }
+
+            ctx.fillStyle = wmColor;
+            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+            ctx.shadowBlur = 2; 
+
+            ctx.textAlign = "left";
+            ctx.textBaseline = "bottom";
+
+            // "by" text
+            ctx.font = "bold 25px 'Rajdhani', sans-serif"; 
+            ctx.fillText("by", wmX, canvas.height - 68); 
+
+            // "Beastcalc" text
+            ctx.font = "bold 50px 'Rajdhani', sans-serif";
+            ctx.fillText("Beastcalc", wmX, canvas.height - 15);
+            ctx.restore();
+            
+         
 
             ctx.fillStyle = wmColor;
             // Reduce shadow for cleaner look
